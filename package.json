@@ -1,0 +1,21 @@
+{
+  "name": "mental-health-platform",
+  "version": "1.0.0",
+  "description": "Digital Mental Health and Psychological Support System for Students",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-server": "npm install --prefix server",
+    "install-client": "npm install --prefix client",
+    "install-all": "npm install && npm run install-server && npm run install-client"
+  },
+  "author": "MERN Project",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.1"
+  }
+}
