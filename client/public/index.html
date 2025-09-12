@@ -7,17 +7,32 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Digital Mental Health and Psychological Support System for Students"
+      content="A confidential and supportive space for student mental wellness."
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!-- This line adds Tailwind CSS for styling -->
+
+    <!-- Google Fonts for a premium, clean look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS - The engine for our styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>MindWell Platform</title>
+
+    <title>MindWell | Your Mental Wellness Platform</title>
+
+    <!-- A small style tweak to make the default background smoother -->
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <!-- THIS IS THE CRITICAL LINE THAT WAS MISSING -->
     <div id="root"></div>
   </body>
 </html>

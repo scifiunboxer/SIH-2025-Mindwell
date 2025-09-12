@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -21,9 +21,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-
-            {/* Private Routes */}
-            <Route path="" element={<PrivateRoute />}>
+            
+            <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/book-appointment" element={<BookingPage />} />
               <Route path="/resources" element={<ResourceHubPage />} />
