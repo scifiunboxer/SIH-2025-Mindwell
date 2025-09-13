@@ -1,54 +1,96 @@
 import React, { useState } from 'react';
 
-const mockPosts = [
-    { id: 1, title: "Feeling overwhelmed with final exams", author: 'Anonymous', time: '2 hours ago', replies: 12, tags: ['Exams', 'Stress'] },
-    { id: 2, title: "Tips for making friends in a new city?", author: 'Riya S.', time: '8 hours ago', replies: 8, tags: ['Social', 'Friendship'] },
-    { id: 3, title: "How do you deal with procrastination?", author: 'Anonymous', time: '1 day ago', replies: 23, tags: ['Productivity', 'Study'] },
-    { id: 4, title: "Just need to vent about my roommate situation", author: 'Amit K.', time: '2 days ago', replies: 5, tags: ['Relationships', 'Venting'] },
+const questionnaire = [
+    { id: 'A1', question: "Been feeling perfectly well and in good health?", options: ["Better than usual", "Same as usual", "Worse than usual", "Much worse than usual"] },
+    { id: 'A2', question: "Been feeling in need of a good tonic?", options: ["Not at all", "No more than usual", "Rather more than usual", "Much more than usual"] },
+    { id: 'A3', question: "Been feeling run down and out of sorts?", options: ["Not at all", "No more than usual", "Rather more than usual", "Much more than usual"] },
+    { id: 'B1', question: "Lost much sleep over worry?", options: ["Not at all", "No more than usual", "Rather more than usual", "Much more than usual"] },
+    { id: 'B3', question: "Felt constantly under strain?", options: ["Not at all", "No more than usual", "Rather more than usual", "Much more than usual"] },
+    { id: 'C1', question: "Been managing to keep yourself busy and occupied?", options: ["More so than usual", "Same as usual", "Rather less than usual", "Much less than usual"] },
+    { id: 'C7', question: "Been able to enjoy your normal day-to-day activities?", options: ["More so than usual", "Same as usual", "Less so than usual", "Much less than usual"] },
+    { id: 'D1', question: "Been thinking of yourself as a worthless person?", options: ["Not at all", "No more than usual", "Rather more than usual", "Much more than usual"] },
+    { id: 'D2', question: "Felt that life is entirely hopeless?", options: ["Not at all", "No more than usual", "Rather more than usual", "Much more than usual"] },
+    { id: 'D4', question: "Thought of the possibility that you might make away with yourself?", options: ["Definitely not", "I don’t think so", "Has crossed my mind", "Definitely have"] },
 ];
 
+const QuestionItem = ({ item, selectedAnswer, onAnswerChange }) => (
+    <div className="p-6 bg-white/40 backdrop-blur-lg rounded-2xl shadow-md border border-white/30 mb-6">
+        <p className="text-xl font-semibold text-gray-800 mb-4">{item.question}</p>
+        <div className="flex flex-col sm:flex-row flex-wrap gap-2">
+            {item.options.map((option, index) => (
+                <button
+                    key={index}
+                    onClick={() => onAnswerChange(item.id, option)}
+                    className={`flex-1 min-w-[120px] text-sm text-center px-4 py-3 rounded-xl transition-all duration-200 transform hover:scale-105 ${
+                        selectedAnswer === option
+                        ? 'bg-purple-600 text-white shadow-lg'
+                        : 'bg-white/50 hover:bg-white/80'
+                    }`}
+                >
+                    {option}
+                </button>
+            ))}
+        </div>
+    </div>
+);
+
 const ForumPage = () => {
-    const [posts, setPosts] = useState(mockPosts);
+    const [answers, setAnswers] = useState({});
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const handleAnswerChange = (questionId, answer) => {
+        setAnswers(prev => ({ ...prev, [questionId]: answer }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // In a real app, you would process the answers here
+        setIsSubmitted(true);
+    };
+
+    const allQuestionsAnswered = Object.keys(answers).length === questionnaire.length;
+
+    if (isSubmitted) {
+        return (
+            <div className="flex items-center justify-center min-h-[80vh] w-full animate-fade-in-up">
+                <div className="w-full max-w-2xl p-8 text-center bg-white/40 backdrop-blur-xl rounded-2xl shadow-lg border border-white/30">
+                    <h1 className="text-4xl font-bold text-purple-700 mb-4">Thank You for Sharing</h1>
+                    <p className="text-gray-700 text-lg mb-6">
+                        Taking a moment to check in with yourself is a sign of great strength. Remember, these results are just a snapshot, not a label.
+                    </p>
+                    <p className="text-gray-600">If you feel you need support, please consider booking a session with a counselor.</p>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="w-full animate-fade-in-up">
-            <div className="text-center mb-12">
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Peer Support Forum</h1>
-                <p className="text-gray-600 mt-2 text-lg max-w-2xl mx-auto">A safe and anonymous space to share, connect, and support one another through the ups and downs of college life.</p>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 space-y-6">
-                    {posts.map(post => (
-                        <div key={post.id} className="p-6 bg-white/40 backdrop-blur-lg rounded-2xl shadow-md border border-white/30 transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer">
-                            <h2 className="text-2xl font-bold text-gray-800">{post.title}</h2>
-                            <div className="flex items-center flex-wrap gap-x-4 text-sm text-gray-600 mt-2">
-                                <span>By <strong>{post.author}</strong></span>
-                                <span className="hidden sm:inline">•</span>
-                                <span>{post.time}</span>
-                                <span className="hidden sm:inline">•</span>
-                                <span>{post.replies} replies</span>
-                            </div>
-                            <div className="mt-4 flex flex-wrap gap-2">
-                                {post.tags.map(tag => (
-                                    <span key={tag} className="px-3 py-1 text-xs font-semibold text-purple-700 bg-purple-100 rounded-full">
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
+            <div className="max-w-3xl mx-auto">
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Wellness Check-in</h1>
+                    <p className="text-gray-600 mt-2 text-lg">Take a moment to reflect on your well-being. Your answers are completely confidential.</p>
                 </div>
 
-                <div className="lg:col-span-1">
-                    <div className="sticky top-28 p-6 bg-white/30 backdrop-blur-xl rounded-2xl shadow-lg border border-white/20">
-                        <h3 className="text-2xl font-bold text-gray-800 mb-4">Share Your Thoughts</h3>
-                        <p className="text-gray-600 mb-6">Create a new post to start a discussion. You can choose to post anonymously.</p>
-                        <button className="w-full py-3 text-lg font-bold text-white bg-purple-600 rounded-xl shadow-lg transition-all duration-300 hover:bg-purple-700 transform hover:scale-105">
-                            Create New Post
+                <form onSubmit={handleSubmit}>
+                    {questionnaire.map(item => (
+                        <QuestionItem 
+                            key={item.id}
+                            item={item}
+                            selectedAnswer={answers[item.id]}
+                            onAnswerChange={handleAnswerChange}
+                        />
+                    ))}
+                    <div className="mt-8">
+                        <button
+                            type="submit"
+                            disabled={!allQuestionsAnswered}
+                            className="w-full py-4 text-lg font-bold text-white bg-purple-600 rounded-xl shadow-lg transition-all duration-300 hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed transform hover:scale-105"
+                        >
+                            See My Results
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );
