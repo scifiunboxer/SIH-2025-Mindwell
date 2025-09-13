@@ -25,8 +25,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[80vh] bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 p-4">
-      <div className="w-full max-w-md animate-fade-in-up">
+    <div className="flex items-center justify-center min-h-[80vh] w-full animate-fade-in-up">
+      <div className="w-full max-w-md">
         <form 
           onSubmit={handleSubmit}
           className="p-8 space-y-6 bg-white/30 backdrop-blur-xl rounded-2xl shadow-lg border border-white/20"

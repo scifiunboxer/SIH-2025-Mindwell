@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Chatbot from '../components/Chatbot';
 
-// A reusable component for our action cards to keep the code clean
 const ActionCard = ({ to, icon, title, description }) => (
     <Link to={to} className="group relative block p-8 bg-white/30 backdrop-blur-xl rounded-2xl shadow-lg border border-white/20 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
         <div className="flex items-center space-x-4">
@@ -25,8 +24,7 @@ const DashboardPage = () => {
   const { user } = useAuth();
 
   return (
-    <div className="min-h-[80vh] bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="w-full animate-fade-in-up">
         <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">
                 Welcome back, <span className="text-purple-700">{user?.name}!</span>
@@ -35,7 +33,6 @@ const DashboardPage = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Column: Main Actions & Info */}
             <div className="lg:col-span-2 space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <ActionCard 
@@ -64,12 +61,10 @@ const DashboardPage = () => {
                 </div>
             </div>
 
-            {/* Right Column: Chatbot */}
             <div className="lg:col-span-1">
                 <Chatbot />
             </div>
         </div>
-      </div>
     </div>
   );
 };

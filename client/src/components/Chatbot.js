@@ -35,7 +35,7 @@ const Chatbot = () => {
                 Authorization: `Bearer ${user.token}`
             }
         };
-        const { data } = await axios.post('http://localhost:5001/api/chatbot/message', { message: input }, config);
+        const { data } = await axios.post('/api/chatbot/message', { message: input }, config);
         
         const botMessage = { from: 'bot', text: data.reply };
         setMessages(prev => [...prev, botMessage]);
@@ -50,13 +50,10 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-12 flex flex-col h-[70vh]
-                    bg-white/20 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30">
-      
+    <div className="flex flex-col h-[70vh] max-w-lg mx-auto bg-white/20 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30">
       <div className="p-4 border-b border-white/30">
         <h2 className="text-xl font-semibold text-center text-gray-800">MindWell Assistant</h2>
       </div>
-
       <div className="flex-grow p-4 overflow-y-auto">
         <div className="flex flex-col space-y-4">
           {messages.map((msg, index) => (
@@ -70,7 +67,6 @@ const Chatbot = () => {
               </div>
             </div>
           ))}
-
           {isLoading && (
             <div className="flex items-end justify-start animate-fade-in-up">
               <div className="px-4 py-2 rounded-2xl max-w-xs shadow bg-gray-100 text-gray-800 rounded-bl-none">
@@ -85,7 +81,6 @@ const Chatbot = () => {
           <div ref={messagesEndRef} />
         </div>
       </div>
-      
       <form onSubmit={sendMessage} className="p-4 border-t border-white/30">
         <div className="flex items-center bg-white/50 rounded-xl shadow-inner">
           <input
@@ -95,8 +90,7 @@ const Chatbot = () => {
             placeholder="Type your message..."
             className="flex-grow px-4 py-3 bg-transparent border-none focus:outline-none focus:ring-0 text-gray-700 placeholder-gray-500"
           />
-          <button type="submit" className="p-3 text-purple-600 hover:text-purple-800 transition-colors duration-200
-                                          disabled:opacity-50 disabled:cursor-not-allowed">
+          <button type="submit" disabled={!input.trim() || isLoading} className="p-3 text-purple-600 hover:text-purple-800 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="22" y1="2" x2="11" y2="13"></line>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>

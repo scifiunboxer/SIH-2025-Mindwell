@@ -11,27 +11,25 @@ const Navbar = () => {
     logout();
     setIsOpen(false);
     navigate('/login');
-
   };
 
   const closeMenu = () => {
     setIsOpen(false);
-  }
+  };
 
   const activeLinkStyle = {
-    color: '#8b5cf6', // A vibrant purple for the active link
+    color: '#8b5cf6',
     fontWeight: '600',
   };
 
   return (
-    <nav className="sticky top-4 z-50 mx-auto max-w-5xl rounded-2xl bg-white/30 p-4 shadow-lg backdrop-blur-lg border border-white/20">
+    <nav className="sticky top-4 z-50 mx-4 md:mx-8 rounded-2xl bg-white/30 p-4 shadow-lg backdrop-blur-lg border border-white/20">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <NavLink to="/" className="text-2xl font-bold text-purple-700 tracking-tight" onClick={closeMenu}>
             MindWell
           </NavLink>
 
-          {/* Desktop Menu */}
           <div className="hidden items-center space-x-8 md:flex">
             {user ? (
               <>
@@ -53,7 +51,6 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="flex items-center md:hidden">
             <button onClick={() => setIsOpen(!isOpen)} className="text-gray-700 focus:outline-none">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -65,7 +62,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         <div className={`mt-4 flex flex-col space-y-4 md:hidden ${isOpen ? 'block' : 'hidden'}`}>
            {user ? (
               <>

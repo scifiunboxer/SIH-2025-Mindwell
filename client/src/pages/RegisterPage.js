@@ -20,7 +20,7 @@ const RegisterPage = () => {
         setError('');
         setLoading(true);
         try {
-            await register(name, email, password, 'student'); // Default role is 'student'
+            await register(name, email, password, 'student');
             navigate('/dashboard');
         } catch (err) {
             setError('Failed to create an account. The email might already be in use.');
@@ -30,8 +30,8 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-[80vh] bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 p-4">
-            <div className="w-full max-w-md animate-fade-in-up">
+        <div className="flex items-center justify-center min-h-[80vh] w-full animate-fade-in-up">
+            <div className="w-full max-w-md">
                 <form 
                   onSubmit={handleSubmit}
                   className="p-8 space-y-6 bg-white/30 backdrop-blur-xl rounded-2xl shadow-lg border border-white/20"
@@ -48,7 +48,6 @@ const RegisterPage = () => {
                     )}
 
                     <div className="space-y-4">
-                        {/* Name Field */}
                         <div className="relative">
                             <input
                                 type="text" id="name" value={name} onChange={(e) => setName(e.target.value)}
@@ -60,7 +59,6 @@ const RegisterPage = () => {
                             </label>
                         </div>
 
-                        {/* Email Field */}
                         <div className="relative">
                             <input
                                 type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}
@@ -72,7 +70,6 @@ const RegisterPage = () => {
                             </label>
                         </div>
 
-                        {/* Password Field */}
                         <div className="relative">
                             <input
                                 type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)}
@@ -84,7 +81,6 @@ const RegisterPage = () => {
                             </label>
                         </div>
 
-                        {/* Confirm Password Field */}
                         <div className="relative">
                             <input
                                 type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}

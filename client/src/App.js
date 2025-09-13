@@ -14,9 +14,9 @@ import PrivateRoute from './components/PrivateRoute';
 function App() {
   return (
     <Router>
-      <div className="bg-gray-50 min-h-screen font-sans">
+      <div className="min-h-screen font-sans">
         <Navbar />
-        <main className="container mx-auto p-4 md:p-8">
+        <main className="px-4 sm:px-6 lg:px-8 py-8">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />

@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 
-// Mock data for our resources
 const allResources = [
     { id: 1, type: 'video', title: 'Guided Meditation for Stress Relief', language: 'English', url: '#' },
     { id: 2, type: 'audio', title: 'Calming Sounds for Better Sleep', language: 'English', url: '#' },
@@ -45,54 +44,50 @@ const ResourceHubPage = () => {
     };
     
     return (
-        <div className="min-h-[80vh] bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 p-4 md:p-8">
-            <div className="max-w-7xl mx-auto">
-                <div className="mb-8 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Resource Hub</h1>
-                    <p className="text-gray-600 mt-2 text-lg">Your library of tools for wellness and growth.</p>
+        <div className="w-full animate-fade-in-up">
+            <div className="text-center mb-12">
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">Resource Hub</h1>
+                <p className="text-gray-600 mt-2 text-lg">Your library of tools for wellness and growth.</p>
+            </div>
+            
+            <div className="p-4 mb-8 bg-white/30 backdrop-blur-xl rounded-2xl shadow-lg border border-white/20 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-2">
+                    <FilterButton name="All" />
+                    <FilterButton name="Video" />
+                    <FilterButton name="Audio" />
+                    <FilterButton name="Guide" />
+                    <FilterButton name="Article" />
                 </div>
-                
-                {/* Filters and Search Bar */}
-                <div className="p-4 mb-8 bg-white/30 backdrop-blur-xl rounded-2xl shadow-lg border border-white/20 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div className="flex flex-wrap items-center gap-2">
-                        <FilterButton name="All" />
-                        <FilterButton name="Video" />
-                        <FilterButton name="Audio" />
-                        <FilterButton name="Guide" />
-                        <FilterButton name="Article" />
-                    </div>
-                    <div className="relative w-full md:w-auto">
-                         <input 
-                            type="text"
-                            placeholder="Search resources..."
-                            value={searchTerm}
-                            onChange={e => setSearchTerm(e.target.value)}
-                            className="w-full md:w-64 pl-10 pr-4 py-2 bg-white/50 rounded-full border-none focus:ring-2 focus:ring-purple-500 shadow-inner"
-                         />
-                         <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                         </div>
-                    </div>
+                <div className="relative w-full md:w-auto">
+                     <input 
+                        type="text"
+                        placeholder="Search resources..."
+                        value={searchTerm}
+                        onChange={e => setSearchTerm(e.target.value)}
+                        className="w-full md:w-64 pl-10 pr-4 py-2 bg-white/50 rounded-full border-none focus:ring-2 focus:ring-purple-500 shadow-inner"
+                     />
+                     <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                     </div>
                 </div>
+            </div>
 
-                {/* Resources Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredResources.length > 0 ? (
-                        filteredResources.map(resource => (
-                            <a href={resource.url} key={resource.id} className="group block p-6 bg-white/40 backdrop-blur-lg rounded-2xl shadow-md border border-white/30 transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-                                <div className="flex items-start justify-between">
-                                    <h3 className="text-xl font-bold text-gray-800 mb-2">{resource.title}</h3>
-                                    <ResourceIcon type={resource.type} />
-                                </div>
-                                <span className="text-sm font-semibold text-purple-700 bg-purple-100 px-3 py-1 rounded-full">{resource.language}</span>
-                            </a>
-                        ))
-                    ) : (
-                         <div className="md:col-span-2 lg:col-span-3 text-center py-12">
-                            <p className="text-xl text-gray-600">No resources found matching your criteria.</p>
-                        </div>
-                    )}
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredResources.length > 0 ? (
+                    filteredResources.map(resource => (
+                        <a href={resource.url} key={resource.id} className="group block p-6 bg-white/40 backdrop-blur-lg rounded-2xl shadow-md border border-white/30 transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                            <div className="flex items-start justify-between">
+                                <h3 className="text-xl font-bold text-gray-800 mb-2">{resource.title}</h3>
+                                <ResourceIcon type={resource.type} />
+                            </div>
+                            <span className="text-sm font-semibold text-purple-700 bg-purple-100 px-3 py-1 rounded-full">{resource.language}</span>
+                        </a>
+                    ))
+                ) : (
+                     <div className="md:col-span-2 lg:col-span-3 text-center py-12">
+                        <p className="text-xl text-gray-600">No resources found matching your criteria.</p>
+                    </div>
+                )}
             </div>
         </div>
     );

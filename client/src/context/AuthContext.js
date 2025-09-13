@@ -7,8 +7,7 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-const API_URL = 'http://localhost:5001/api/users';
-
+const API_URL = '/api/users';
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
