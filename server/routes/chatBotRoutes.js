@@ -1,5 +1,8 @@
 import express from 'express';
 const router = express.Router();
-// We will add controller logic later
-router.get('/', (req, res) => res.send('Admin route'));
+import { processMessage } from '../controllers/chatbotController.js';
+import { protect } from '../middleware/authMiddleware.js';
+
+router.route('/message').post(protect, processMessage);
+
 export default router;
